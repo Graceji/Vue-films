@@ -5,33 +5,26 @@
         <i class="el-icon-star-off"></i>
         <span class="logo-name">疯人电影院</span>
       </div>
-      <el-input v-model="input" placeholder="请输入内容" prefix-icon="el-icon-search"></el-input>
-      <!-- <el-menu
+      <el-menu
         :default-active="activeIndex2"
         class="el-menu-demo"
         mode="horizontal"
         @select="handleSelect"
-        background-color="#545c64"
+        background-color="#000"
         text-color="#fff"
         active-text-color="#ffd04b">
-        <el-menu-item index="1">处理中心</el-menu-item>
-        <el-submenu index="2">
-          <template slot="title">我的工作台</template>
-          <el-menu-item index="2-1">选项1</el-menu-item>
-          <el-menu-item index="2-2">选项2</el-menu-item>
-          <el-menu-item index="2-3">选项3</el-menu-item>
-        </el-submenu>
-        <el-menu-item index="3"><a href="https://www.ele.me" target="_blank">订单管理</a></el-menu-item>
-        <el-menu-item>
-          
-        </el-menu-item>
-      </el-menu> -->
+        <el-menu-item index="1">全部</el-menu-item>
+        <el-menu-item index="2">电影</el-menu-item>
+        <el-menu-item index="3">电视剧</el-menu-item>
+        <el-menu-item index="4">综艺</el-menu-item>
+      </el-menu>
+      <el-input v-model="input" placeholder="请输入电影名" prefix-icon="el-icon-search"></el-input>
     </el-header>
     <el-container>
       <el-aside width="200px">Aside</el-aside>
       <el-container>
         <el-main>Main</el-main>
-        <el-footer>Footer</el-footer>
+        <el-footer>欢迎来到Graceji的疯人电影院</el-footer>
       </el-container>
     </el-container>
   </el-container>
@@ -54,41 +47,47 @@
 </script>
 
 <style lang="scss">
-.el-header {
-  background-color: #545c64;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  .logo {
-    color: #fff;
+
+.el-container {
+  height: 100%;
+  .el-menu--horizontal {
+    width: 700px;
+    display: flex;
+    justify-content: space-between;
   }
-  .el-input {
-    width: 500px;
+  .el-header {
+    background-color: #000;
+    opacity: 0.8;
+    display: flex;
+    align-items: center;
+    .logo {
+      color: #fff;
+    }
+    .el-input {
+      flex: 1;
+    }
   }
 }
 
 .el-footer {
-  background-color: #b3c0d1;
-  color: #333;
+  background-color: #000;
+  opacity: 0.8;
+  color: #fff;
   text-align: center;
   line-height: 60px;
 }
 
 .el-aside {
-  background-color: #d3dce6;
+  background-color: rgb(250, 251, 252);
   color: #333;
   text-align: center;
   line-height: 200px;
 }
 
 .el-main {
-  background-color: #e9eef3;
+  background-color: rgb(250, 251, 252);
   color: #333;
   text-align: center;
   line-height: 160px;
-}
-
-body > .el-container {
-  margin-bottom: 40px;
 }
 </style>

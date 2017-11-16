@@ -17,6 +17,7 @@ html,
   margin: 0;
   padding: 0;
   height: 100%;
+  overflow: hidden;
 }
 #app {
   font-family: "Avenir", Helvetica, Arial, sans-serif;
