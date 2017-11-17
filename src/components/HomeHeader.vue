@@ -12,10 +12,18 @@
       background-color="#000"
       text-color="#fff"
       active-text-color="#ffd04b">
-      <el-menu-item index="1">全部</el-menu-item>
-      <el-menu-item index="2">电影</el-menu-item>
-      <el-menu-item index="3">电视剧</el-menu-item>
-      <el-menu-item index="4">综艺</el-menu-item>
+      <el-menu-item index="1">
+        <router-link to="allVideos">全部</router-link>
+      </el-menu-item>
+      <el-menu-item index="2">
+        <router-link to="film">电影</router-link>
+      </el-menu-item>
+      <el-menu-item index="3">
+        <router-link to="tvPlay">电视剧</router-link>
+      </el-menu-item>
+      <el-menu-item index="4">
+        <router-link to="varietyShow">综艺</router-link>
+      </el-menu-item>
     </el-menu>
     <el-input v-model="input" placeholder="请输入电影名" prefix-icon="el-icon-search"></el-input>
     <el-button type="success">登录</el-button>
@@ -52,6 +60,11 @@ export default {
     width: 600px;
     display: flex;
     justify-content: space-between;
+    .el-menu-item {
+      a {
+        text-decoration: none;
+      }
+    }
   }
   .el-input {
     flex: 1;

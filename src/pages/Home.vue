@@ -4,12 +4,12 @@
       <nav-header></nav-header>
     </el-header>
     <el-container>
-      <el-aside width="200px">
+      <!-- <el-aside width="200px">
         <aside-content />
-      </el-aside>
+      </el-aside> -->
       <el-container>
         <el-main>
-          <main-content></main-content>
+          <router-view />
         </el-main>
         <el-footer>欢迎来到Graceji的疯人电影院</el-footer>
       </el-container>
@@ -19,7 +19,6 @@
 
 <script>
   import navHeader from '../components/HomeHeader.vue'
-  import MainContent from '../components/MainContent.vue'
   import Aside from '../components/Aside.vue'
   export default {
     data () {
@@ -30,7 +29,6 @@
     },
     components: {
       'nav-header': navHeader,
-      'main-content': MainContent,
       'aside-content': Aside
     }
   }

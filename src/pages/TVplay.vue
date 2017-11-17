@@ -1,3 +1,3 @@
 <template>
-  <div>Main1</div>
+  <div>TVplay</div>
 </template>
