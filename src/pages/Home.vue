@@ -61,8 +61,6 @@
       .el-main {
         background-color: rgb(250, 251, 252);
         color: #333;
-        text-align: center;
-        line-height: 160px;
       }
     }
   }
