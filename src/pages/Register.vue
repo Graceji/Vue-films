@@ -1,8 +1,8 @@
 <template>
-  <div class="login">
+  <div class="register">
     <el-card class="box-card">
       <div slot="header" class="clearfix">
-        <span style="line-height: 36px;">用户登录</span>
+        <span style="line-height: 36px;">用户注册</span>
       </div>
       <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="100px" class="login-ruleForm">
         <el-form-item label="用户名：" prop="username">
@@ -11,8 +11,11 @@
         <el-form-item label="密码：" prop="pass">
           <el-input type="password" v-model="ruleForm.pass" auto-complete="off"></el-input>
         </el-form-item>
+        <el-form-item label="确认密码：" prop="checkPass">
+          <el-input type="password" v-model="ruleForm.checkPass" auto-complete="off"></el-input>
+        </el-form-item>
         <el-form-item>
-          <el-button type="primary" @click="submitForm('ruleForm')">立即登录</el-button>
+          <el-button type="primary" @click="submitForm('ruleForm')">立即注册</el-button>
         </el-form-item>
       </el-form>
     </el-card>
@@ -36,10 +39,20 @@ export default {
         callback()
       }
     }
+    const validatePass2 = (rule, value, callback) => {
+      if (value === '') {
+        callback(new Error('请再次输入密码'))
+      } else if (value !== this.ruleForm.pass) {
+        callback(new Error('两次输入密码不一致!'))
+      } else {
+        callback()
+      }
+    }
     return {
       ruleForm: {
         username: '',
-        pass: ''
+        pass: '',
+        checkPass: ''
       },
       rules: {
         username: [
@@ -47,6 +60,9 @@ export default {
         ],
         pass: [
           { required: true, validator: validatePass, trigger: 'blur' }
+        ],
+        checkPass: [
+          { required: true, validator: validatePass2, trigger: 'blur' }
         ]
       }
     }
@@ -57,7 +73,7 @@ export default {
         if (valid) {
           // this.ruleForm.username
           // this.ruleForm.pass
-          // 进行登录接口的请求
+          // 进行注册接口的请求
         } else {
           console.log('error submit!!')
           return false
@@ -69,7 +85,7 @@ export default {
 </script>
 
 <style lang="scss">
-  .login {
+  .register {
     box-sizing: border-box;
     width: 100%;
     height: 100%;
