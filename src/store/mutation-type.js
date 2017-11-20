@@ -1,0 +1,1 @@
+export const INIT_VEDIO_DATA = 'INIT_VEDIO_DATA'

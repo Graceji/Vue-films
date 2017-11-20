@@ -1,12 +1,14 @@
 <template>
-  <el-col :span="6">
+  <el-col :span="5">
     <el-card :body-style="{ padding: '0px' }">
       <!-- <img src="~examples/assets/images/hamburger.png" class="image"> -->
       <div style="padding: 14px;">
-        <span>{{ fileName }}</span>
         <div class="bottom clearfix">
-          <time class="time">{{ score }}</time>
-          <el-rate v-model="score" disabled show-score text-color="#ff9900" score-template="{value}">
+          <div class="img">
+            <img :src="baseUrl + item.img" alt="">
+          </div>
+          <span>{{ item.name }}</span>
+          <el-rate v-model="item.star" disabled show-score text-color="#ff9900" score-template="{value}">
           </el-rate>
         </div>
       </div>
@@ -18,16 +20,27 @@
   export default {
     data () {
       return {
+        baseUrl: 'http://vue.wclimb.site/images/'
       }
     },
-    props: ['fileName', 'score']
+    props: ['item']
   }
 </script>
 
-<style>
+<style lang="scss">
   .el-col {
     border-radius: 4px;
     margin-right: 30px;
     margin-bottom: 30px;
+    .img {
+      width: 160px;
+      height: 220px;
+      margin: 0 auto;
+      margin-bottom: 8px;
+      img {
+        width: 100%;
+        height: 100%;
+      }
+    }
   }
 </style>

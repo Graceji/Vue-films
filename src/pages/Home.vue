@@ -20,16 +20,32 @@
 <script>
   import navHeader from '../components/HomeHeader.vue'
   import Aside from '../components/Aside.vue'
+  import { mapMutations } from 'vuex'
+  import * as types from '../store/mutation-type'
+  import { initHome } from '../data'
   export default {
     data () {
       return {
+        test: 1
       }
     },
     methods: {
+      ...mapMutations([types.INIT_VEDIO_DATA]),
+      initVideoData () {
+        initHome()
+          .then((data) => {
+            this[types.INIT_VEDIO_DATA](data)
+          })
+      }
     },
     components: {
       'nav-header': navHeader,
       'aside-content': Aside
+    },
+    created () {
+      // 实例创建后初始化数据
+      this.initVideoData()
+      console.log('我是不是先进来？')
     }
   }
 </script>

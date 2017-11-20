@@ -4,9 +4,9 @@ import Home from '@/pages/Home'
 import Login from '@/pages/Login'
 import Register from '@/pages/Register'
 import AllVideo from '@/pages/AllVideo'
-import Film from '@/pages/Film'
-import TVplay from '@/pages/TVplay'
-import VarietyShow from '@/pages/VarietyShow'
+// import Film from '@/pages/Film'
+// import TVplay from '@/pages/TVplay'
+// import VarietyShow from '@/pages/VarietyShow'
 
 Vue.use(Router)
 
@@ -24,15 +24,15 @@ export default new Router({
       }, {
         path: 'film',
         name: 'film',
-        component: Film
+        component: AllVideo
       }, {
         path: 'tvPlay',
         name: 'tvPlay',
-        component: TVplay
+        component: AllVideo
       }, {
         path: 'varietyShow',
         name: 'varietyShow',
-        component: VarietyShow
+        component: AllVideo
       }]
     }, {
       path: '/login',

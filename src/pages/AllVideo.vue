@@ -1,49 +1,50 @@
 <template>
-  <div class="wrap">
-    <div class="video-header">
-      <span>电影</span>
-      <router-link to="">更多»</router-link>
-    </div>
-    <el-row type="flex" class="row-bg">
-      <viedo-item v-for="(item, index) in videos" :key="index" :fileName="item.name" :score="item.score" />
-    </el-row>
-  </div>
+  <video-page :datas="datas" :title="title" />
 </template>
 
 <script>
-  import videoItem from '../components/VideoItem.vue'
+  import videoPage from '../components/VideoPage.vue'
+  import { mapState } from 'vuex'
   export default {
     data () {
+      console.log('this.videoData', this.$store.state)
+      console.log('videoData', this.$store.state.videoData)
       return {
-        videos: [{
-          id: 1,
-          name: '战狼',
-          score: 15
-        }, {
-          id: 2,
-          name: '战狼1',
-          score: 9
-        }, {
-          id: 3,
-          name: '战狼2',
-          score: 9
-        }, {
-          id: 4,
-          name: '战狼3',
-          score: 9
-        }, {
-          id: 5,
-          name: '战狼4',
-          score: 9
-        }, {
-          id: 6,
-          name: '战狼5',
-          score: 9
-        }]
+        title: '全部',
+        datas: this.$store.state.videoData[3]
       }
     },
+    computed: {
+      ...mapState(['videoData'])
+    },
     components: {
-      'viedo-item': videoItem
+      'video-page': videoPage
+    },
+    watch: {
+      '$route.path' (val) {
+        switch (val) {
+          case '/allVideos':
+            this.title = '全部'
+            this.datas = this.videoData[3]
+            break
+          case '/film':
+            this.title = '电影'
+            this.datas = this.videoData[0]
+            break
+          case '/tvPlay':
+            this.title = '电视剧'
+            this.datas = this.videoData[1]
+            break
+          case '/varietyShow':
+            this.title = '综艺'
+            this.datas = this.videoData[2]
+            break
+          default:
+            this.title = '全部'
+            this.datas = this.videoData[3]
+            break
+        }
+      }
     }
   }
 </script>
@@ -57,7 +58,6 @@
       justify-content: space-between;
       border-bottom: 1px solid #eaeaea;
       margin-bottom: 20px;
-      padding-bottom: 6px;
       a {
         text-decoration: none;
       }
@@ -81,6 +81,5 @@
   
   .row-bg {
     padding: 10px 0;
-    background-color: red;
   }
 </style>

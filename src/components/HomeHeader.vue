@@ -25,7 +25,8 @@
         <router-link to="varietyShow">综艺</router-link>
       </el-menu-item>
     </el-menu>
-    <el-input v-model="input" placeholder="请输入电影名" prefix-icon="el-icon-search"></el-input>
+    <!-- v-model="input" -->
+    <el-input placeholder="请输入电影名" prefix-icon="el-icon-search"></el-input>
     <el-button type="success">登录</el-button>
     <el-button type="warning">注册</el-button>
     <el-button type="text">注销</el-button>
