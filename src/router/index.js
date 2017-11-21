@@ -4,6 +4,7 @@ import Home from '@/pages/Home'
 import Login from '@/pages/Login'
 import Register from '@/pages/Register'
 import AllVideo from '@/pages/AllVideo'
+import Detail from '@/pages/Detail'
 // import Film from '@/pages/Film'
 // import TVplay from '@/pages/TVplay'
 // import VarietyShow from '@/pages/VarietyShow'
@@ -42,6 +43,10 @@ export default new Router({
       path: '/register',
       name: 'Register',
       component: Register
+    }, {
+      path: '/detail/:id',
+      name: 'Detail',
+      component: Detail
     }
   ]
 })

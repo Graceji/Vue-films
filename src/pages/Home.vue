@@ -26,7 +26,6 @@
   export default {
     data () {
       return {
-        test: 1
       }
     },
     methods: {
@@ -45,7 +44,6 @@
     created () {
       // 实例创建后初始化数据
       this.initVideoData()
-      console.log('我是不是先进来？')
     }
   }
 </script>

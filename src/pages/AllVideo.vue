@@ -1,5 +1,5 @@
 <template>
-  <video-page :datas="datas" :title="title" />
+  <video-page :datas="videoData.length ? videoData[activeIndex] : []" :title="title" />
 </template>
 
 <script>
@@ -7,11 +7,9 @@
   import { mapState } from 'vuex'
   export default {
     data () {
-      console.log('this.videoData', this.$store.state)
-      console.log('videoData', this.$store.state.videoData)
       return {
         title: '全部',
-        datas: this.$store.state.videoData[3]
+        activeIndex: 3
       }
     },
     computed: {
@@ -25,23 +23,23 @@
         switch (val) {
           case '/allVideos':
             this.title = '全部'
-            this.datas = this.videoData[3]
+            this.activeIndex = 3
             break
           case '/film':
             this.title = '电影'
-            this.datas = this.videoData[0]
+            this.activeIndex = 0
             break
           case '/tvPlay':
             this.title = '电视剧'
-            this.datas = this.videoData[1]
+            this.activeIndex = 1
             break
           case '/varietyShow':
             this.title = '综艺'
-            this.datas = this.videoData[2]
+            this.activeIndex = 2
             break
           default:
             this.title = '全部'
-            this.datas = this.videoData[3]
+            this.activeIndex = 3
             break
         }
       }
