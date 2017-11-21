@@ -6,7 +6,7 @@ import mutations from './mutations'
 Vue.use(Vuex)
 
 const state = {
-  videoData: null
+  videoData: []
 }
 
 export default new Vuex.Store({

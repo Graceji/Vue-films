@@ -8,7 +8,7 @@
             <img :src="baseUrl + item.img" alt="">
           </div>
           <span>{{ item.name }}</span>
-          <el-rate v-model="item.star" disabled show-score text-color="#ff9900" score-template="{value}">
+          <el-rate v-model="star" disabled show-score text-color="#ff9900" score-template="{value}">
           </el-rate>
         </div>
       </div>
@@ -20,7 +20,8 @@
   export default {
     data () {
       return {
-        baseUrl: 'http://vue.wclimb.site/images/'
+        baseUrl: 'http://vue.wclimb.site/images/',
+        star: parseFloat(this.item.star)
       }
     },
     props: ['item']
