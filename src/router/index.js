@@ -18,6 +18,7 @@ export default new Router({
       path: '/',
       name: 'HomePage',
       component: Home,
+      redirect: '/allVideos',
       children: [{
         path: 'allVideos',
         name: 'allVideo',

@@ -5,7 +5,7 @@
       <span class="logo-name">疯人电影院</span>
     </div>
     <el-menu
-      :default-active="activeIndex2"
+      :default-active="activeIndex"
       class="el-menu-demo"
       mode="horizontal"
       @select="handleSelect"
@@ -37,13 +37,30 @@
 export default {
   data () {
     return {
-      activeIndex: '1',
-      activeIndex2: '1'
+      activeIndex: '1'
     }
   },
   methods: {
     handleSelect (key, keyPath) {
       console.log(key, keyPath)
+    }
+  },
+  created () {
+    switch (this.$route.path) {
+      case '/allVideos':
+        this.activeIndex = '1'
+        break
+      case '/film':
+        this.activeIndex = '2'
+        break
+      case '/tvPlay':
+        this.activeIndex = '3'
+        break
+      case '/varietyShow':
+        this.activeIndex = '4'
+        break
+      default:
+        break
     }
   }
 }
