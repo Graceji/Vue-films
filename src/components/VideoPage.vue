@@ -2,11 +2,22 @@
   <div class="wrap">
     <div class="video-header">
       <span>{{title}}({{datas.length}})</span>
-      <router-link to="">更多»</router-link>
+      <!-- <router-link to="">更多»</router-link> -->
     </div>
     <el-row type="flex" class="row-bg">
-      <viedo-item v-for="(item, index) in datas" :key="index" :item="item" v-if="index < 10" />
+      <!-- v-if="index < 10" -->
+      <viedo-item v-for="(item, index) in datas" :key="index" :item="item" />
     </el-row>
+    <div class="block">
+      <el-pagination
+        @size-change="handleSizeChange"
+        @current-change="handleCurrentChange"
+        :current-page.sync="currentPage1"
+        :page-size="12"
+        layout="total, prev, pager, next"
+        :total="datas.length">
+      </el-pagination>
+    </div>
   </div>
 </template>
 
@@ -33,6 +44,8 @@
   .wrap {
     width: 75%;
     margin: 0 auto;
+    display: flex;
+    flex-direction: column;
     .video-header {
       display: flex;
       justify-content: space-between;
@@ -41,6 +54,9 @@
       a {
         text-decoration: none;
       }
+    }
+    .block {
+      align-self: center;
     }
   }
   .el-row {

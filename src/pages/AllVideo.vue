@@ -1,5 +1,5 @@
 <template>
-  <video-page :datas="videoData.length ? videoData[activeIndex] : []" :title="title" />
+  <video-page :datas="videoData.length ? videoData : []" :title="title" />
 </template>
 
 <script>
@@ -17,33 +17,33 @@
     },
     components: {
       'video-page': videoPage
-    },
-    watch: {
-      '$route.path' (val) {
-        switch (val) {
-          case '/allVideos':
-            this.title = '全部'
-            this.activeIndex = 3
-            break
-          case '/film':
-            this.title = '电影'
-            this.activeIndex = 0
-            break
-          case '/tvPlay':
-            this.title = '电视剧'
-            this.activeIndex = 1
-            break
-          case '/varietyShow':
-            this.title = '综艺'
-            this.activeIndex = 2
-            break
-          default:
-            this.title = '全部'
-            this.activeIndex = 3
-            break
-        }
-      }
     }
+    // watch: {
+    //   '$route.path' (val) {
+    //     switch (val) {
+    //       case '/allVideos':
+    //         this.title = '全部'
+    //         this.activeIndex = 3
+    //         break
+    //       case '/film':
+    //         this.title = '电影'
+    //         this.activeIndex = 0
+    //         break
+    //       case '/tvPlay':
+    //         this.title = '电视剧'
+    //         this.activeIndex = 1
+    //         break
+    //       case '/varietyShow':
+    //         this.title = '综艺'
+    //         this.activeIndex = 2
+    //         break
+    //       default:
+    //         this.title = '全部'
+    //         this.activeIndex = 3
+    //         break
+    //     }
+    //   }
+    // }
   }
 </script>
 
