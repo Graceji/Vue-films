@@ -27,8 +27,12 @@
     </el-menu>
     <!-- v-model="input" -->
     <el-input placeholder="请输入电影名" prefix-icon="el-icon-search"></el-input>
-    <el-button type="success">登录</el-button>
-    <el-button type="warning">注册</el-button>
+    <el-button type="success">
+      <router-link to="/login">登录</router-link>
+    </el-button>
+    <el-button type="warning">
+      <router-link to="/register">注册</router-link>
+    </el-button>
     <el-button type="text">注销</el-button>
   </div>
 </template>
@@ -68,6 +72,10 @@ export default {
 </script>
 
 <style lang="scss">
+a {
+  text-decoration: none;
+  color: #fff;
+}
 .nav-header {
   flex: 1;
   display: flex;

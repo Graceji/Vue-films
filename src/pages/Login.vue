@@ -55,6 +55,8 @@ export default {
     submitForm (formName) {
       this.$refs[formName].validate((valid) => {
         if (valid) {
+          console.log(this.ruleForm.username)
+          console.log(this.ruleForm.pass)
           // this.ruleForm.username
           // this.ruleForm.pass
           // 进行登录接口的请求

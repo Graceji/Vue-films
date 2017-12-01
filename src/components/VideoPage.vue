@@ -2,7 +2,6 @@
   <div class="wrap">
     <div class="video-header">
       <span>{{title}}({{datas.len}})</span>
-      <!-- <router-link to="">更多»</router-link> -->
     </div>
     <el-row type="flex" class="row-bg">
       <!-- v-if="index < 10" -->
@@ -13,6 +12,7 @@
       <!-- :current-page.sync="currentPage1" -->
       <el-pagination
         @current-change="handleCurrentChange"
+        :current-page="currentPage"
         :page-size="12"
         layout="total, prev, pager, next"
         :total="datas.len">
@@ -26,6 +26,7 @@
   export default {
     data () {
       return {
+        currentPage: 1
       }
     },
     props: {
@@ -58,6 +59,15 @@
         }
         // 重新请求数据
         this.$emit('getNextPage', type, val)
+      }
+    },
+    watch: {
+      '$route.query.type' (val, oldVal) {
+        // if () {
+
+        // }
+        this.currentPage = 1
+        console.log('this.current', this.currentPage)
       }
     }
   }

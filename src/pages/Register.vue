@@ -23,6 +23,7 @@
 </template>
 
 <script>
+import { register } from '../data'
 export default {
   data () {
     const validateName = (rule, value, callback) => {
@@ -74,6 +75,25 @@ export default {
           // this.ruleForm.username
           // this.ruleForm.pass
           // 进行注册接口的请求
+          register(this.ruleForm.username, this.ruleForm.pass)
+            .then(res => {
+              if (res === '该账号已注册，请直接登录') {
+                this.$message({
+                  message: res,
+                  type: 'warning'
+                })
+              } else if (res === '注册成功') {
+                this.$message({
+                  message: res,
+                  type: 'success'
+                })
+              }
+            })
+            .then(() => {
+              setTimeout(() => {
+                this.$router.push('/login')
+              }, 3000)
+            })
         } else {
           console.log('error submit!!')
           return false
