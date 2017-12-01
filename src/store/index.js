@@ -6,7 +6,10 @@ import mutations from './mutations'
 Vue.use(Vuex)
 
 const state = {
-  videoData: [],
+  videos: {
+    len: 0,
+    datas: []
+  },
   tvplays: [],
   films: [],
   variety: []

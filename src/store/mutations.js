@@ -2,7 +2,8 @@ import * as types from './mutation-type'
 
 export default {
   [types.INIT_VEDIO_DATA] (state, data) {
-    state.videoData = data
+    state.videos.len = data.total
+    state.videos.datas = data.datas
   },
   [types.TV_PLAY_DATA] (state, data) {
     state.tvplays = data

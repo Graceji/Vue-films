@@ -1,21 +1,21 @@
 <template>
   <div class="wrap">
     <div class="video-header">
-      <span>{{title}}({{datas.length}})</span>
+      <span>{{title}}({{datas.len}})</span>
       <!-- <router-link to="">更多»</router-link> -->
     </div>
     <el-row type="flex" class="row-bg">
       <!-- v-if="index < 10" -->
-      <viedo-item v-for="(item, index) in datas" :key="index" :item="item" />
+      <viedo-item v-for="(item, index) in datas.datas" :key="index" :item="item" />
     </el-row>
     <div class="block">
+      <!-- @size-change="handleSizeChange" -->
+      <!-- :current-page.sync="currentPage1" -->
       <el-pagination
-        @size-change="handleSizeChange"
         @current-change="handleCurrentChange"
-        :current-page.sync="currentPage1"
         :page-size="12"
         layout="total, prev, pager, next"
-        :total="datas.length">
+        :total="datas.len">
       </el-pagination>
     </div>
   </div>
@@ -29,13 +29,36 @@
       }
     },
     props: {
-      datas: Array,
+      datas: Object,
       title: String
     },
-    // computed: {
-    // },
+    computed: {
+    },
     components: {
       'viedo-item': videoItem
+    },
+    methods: {
+      handleCurrentChange (val) {
+        // 修改前端路由
+        this.$router.push(`/videos?page=${val}`)
+        let type
+        switch (this.title) {
+          case '全部':
+            type = 'all'
+            break
+          case '电影':
+            type = 'film'
+            break
+          case '电视剧':
+            type = 'tvplay'
+            break
+          case '综艺':
+            type = 'variety'
+            break
+        }
+        // 重新请求数据
+        this.$emit('getNextPage', type, val)
+      }
     }
   }
 </script>

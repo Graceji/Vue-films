@@ -13,16 +13,16 @@
       text-color="#fff"
       active-text-color="#ffd04b">
       <el-menu-item index="1">
-        <router-link to="allVideos">全部</router-link>
+        <router-link :to="{ path: '/videos', query: { type: 'all' } }">全部</router-link>
       </el-menu-item>
       <el-menu-item index="2">
-        <router-link to="film">电影</router-link>
+        <router-link :to="{ path: '/videos', query: { type: 'film' } }">电影</router-link>
       </el-menu-item>
       <el-menu-item index="3">
-        <router-link to="tvPlay">电视剧</router-link>
+        <router-link :to="{ path: '/videos', query: { type: 'tvplay' } }">电视剧</router-link>
       </el-menu-item>
       <el-menu-item index="4">
-        <router-link to="varietyShow">综艺</router-link>
+        <router-link :to="{ path: '/videos', query: { type: 'variety' } }">综艺</router-link>
       </el-menu-item>
     </el-menu>
     <!-- v-model="input" -->
@@ -42,21 +42,22 @@ export default {
   },
   methods: {
     handleSelect (key, keyPath) {
-      console.log(key, keyPath)
+      // console.log(key, keyPath)
     }
   },
   created () {
-    switch (this.$route.path) {
-      case '/allVideos':
+    console.log('this.$route.query', this.$route.query)
+    switch (this.$route.query.type) {
+      case 'all':
         this.activeIndex = '1'
         break
-      case '/film':
+      case 'film':
         this.activeIndex = '2'
         break
-      case '/tvPlay':
+      case 'tvplay':
         this.activeIndex = '3'
         break
-      case '/varietyShow':
+      case 'variety':
         this.activeIndex = '4'
         break
       default:

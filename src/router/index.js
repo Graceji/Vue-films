@@ -3,11 +3,8 @@ import Router from 'vue-router'
 import Home from '@/pages/Home'
 import Login from '@/pages/Login'
 import Register from '@/pages/Register'
-import AllVideo from '@/pages/AllVideo'
 import Detail from '@/pages/Detail'
-import Film from '@/pages/Film'
-import TVplay from '@/pages/TVplay'
-import VarietyShow from '@/pages/VarietyShow'
+import Videos from '@/pages/Videos'
 
 Vue.use(Router)
 
@@ -18,23 +15,11 @@ export default new Router({
       path: '/',
       name: 'HomePage',
       component: Home,
-      redirect: '/allVideos',
+      redirect: '/videos',
       children: [{
-        path: 'allVideos',
-        name: 'allVideo',
-        component: AllVideo
-      }, {
-        path: 'film',
-        name: 'film',
-        component: Film
-      }, {
-        path: 'tvPlay',
-        name: 'tvPlay',
-        component: TVplay
-      }, {
-        path: 'varietyShow',
-        name: 'varietyShow',
-        component: VarietyShow
+        path: '/videos',
+        name: 'videos',
+        component: Videos
       }]
     }, {
       path: '/login',

@@ -9,7 +9,7 @@
       </el-aside> -->
       <el-container>
         <el-main>
-          <router-view />
+          <router-view></router-view>
         </el-main>
         <el-footer>欢迎来到Graceji的疯人电影院</el-footer>
       </el-container>
@@ -19,39 +19,21 @@
 
 <script>
   import navHeader from '../components/HomeHeader.vue'
-  import Aside from '../components/Aside.vue'
-  import { mapMutations } from 'vuex'
-  import * as types from '../store/mutation-type'
-  import { initHome } from '../data'
+  // import Aside from '../components/Aside.vue'
   export default {
     data () {
       return {
       }
     },
     methods: {
-      ...mapMutations([types.INIT_VEDIO_DATA]),
-      initVideoData () {
-        initHome()
-          .then((data) => {
-            this[types.INIT_VEDIO_DATA](data)
-          })
-      }
     },
     components: {
-      'nav-header': navHeader,
-      'aside-content': Aside
+      'nav-header': navHeader
+      // 'aside-content': Aside
     },
     created () {
       // 实例创建后初始化数据
-      this.initVideoData()
-    },
-    beforeRouteEnter (to, from, next) {
-      console.log('to', to)
-      console.log('from', from)
-      next()
-      // 在渲染该组件的对应路由被 confirm 前调用
-      // 不！能！获取组件实例 `this`
-      // 因为当守卫执行前，组件实例还没被创建
+      // this.initVideoData()
     }
   }
 </script>

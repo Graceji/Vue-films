@@ -28,3 +28,10 @@ export const getVariety = () => {
       return res.data
     })
 }
+
+export const getVideos = (type, page) => {
+  return axios.get(`${baseUrl}list?type=${type}&page=${page}`)
+    .then((res) => {
+      return res.data
+    })
+}
