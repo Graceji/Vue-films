@@ -20,6 +20,7 @@
 </template>
 
 <script>
+import { login } from '../data'
 export default {
   data () {
     const validateName = (rule, value, callback) => {
@@ -55,11 +56,24 @@ export default {
     submitForm (formName) {
       this.$refs[formName].validate((valid) => {
         if (valid) {
-          console.log(this.ruleForm.username)
-          console.log(this.ruleForm.pass)
-          // this.ruleForm.username
-          // this.ruleForm.pass
           // 进行登录接口的请求
+          login(this.ruleForm.username, this.ruleForm.pass)
+            .then(res => {
+              if (res === '用户名不存在' || res === '登录密码错误') {
+                this.$message({
+                  message: res,
+                  type: 'warning'
+                })
+              } else {
+                this.$message({
+                  message: res,
+                  type: 'success'
+                })
+                setTimeout(() => {
+                  this.$router.push('/')
+                }, 3000)
+              }
+            })
         } else {
           console.log('error submit!!')
           return false

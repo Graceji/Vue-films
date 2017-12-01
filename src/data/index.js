@@ -35,9 +35,18 @@ export const register = (username, pass) => {
     pass
   })
   .then(res => {
-    console.log(res)
     return res.data
   })
+}
+
+export const login = (username, pass) => {
+  return axios.post(`${baseUrl}login`, {
+    username,
+    pass
+  })
+    .then(res => {
+      return res.data
+    })
 }
 
 export const getVideos = (type, page) => {
