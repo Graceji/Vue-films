@@ -1,33 +1,6 @@
 import axios from 'axios'
 // const baseUrl = 'http://vue.wclimb.site/vi/'
 const baseUrl = '/videos/api/'
-// export const initHome = () => {
-//   return axios.get(`${baseUrl}list/all`)
-//     .then((res) => {
-//       return res.data
-//     })
-// }
-
-// export const getTvs = () => {
-//   return axios.get(`${baseUrl}list/tvplay`)
-//     .then((res) => {
-//       return res.data
-//     })
-// }
-
-// export const getFilms = () => {
-//   return axios.get(`${baseUrl}list/film`)
-//     .then((res) => {
-//       return res.data
-//     })
-// }
-
-// export const getVariety = () => {
-//   return axios.get(`${baseUrl}list/variety`)
-//     .then((res) => {
-//       return res.data
-//     })
-// }
 
 export const register = (username, pass) => {
   return axios.post(`${baseUrl}register`, {
@@ -52,6 +25,22 @@ export const login = (username, pass) => {
 export const getVideos = (type, page) => {
   return axios.get(`${baseUrl}list?type=${type}&page=${page}`)
     .then((res) => {
+      return res.data
+    })
+}
+
+// 检查是否登录
+export const checkLogin = () => {
+  return axios.get(`${baseUrl}isLogin`)
+    .then(res => {
+      return res.data
+    })
+}
+
+// 注销
+export const signout = () => {
+  return axios.get(`${baseUrl}signout`)
+    .then(res => {
       return res.data
     })
 }

@@ -27,30 +27,54 @@
     </el-menu>
     <!-- v-model="input" -->
     <el-input placeholder="请输入电影名" prefix-icon="el-icon-search"></el-input>
-    <el-button type="success">
+    <el-button type="success" v-if="!isLogin">
       <router-link to="/login">登录</router-link>
     </el-button>
-    <el-button type="warning">
+    <span v-if="isLogin" class="welcome">欢迎{{this.username}}的到来！</span>
+    <el-button type="warning" v-if="!isLogin">
       <router-link to="/register">注册</router-link>
     </el-button>
-    <el-button type="text">注销</el-button>
+    <el-button type="text" @click="logout" v-if="isLogin">注销</el-button>
   </div>
 </template>
 
 <script>
+import { checkLogin, signout } from '../data'
 export default {
   data () {
     return {
-      activeIndex: '1'
+      activeIndex: '1',
+      isLogin: true,
+      username: ''
     }
   },
   methods: {
     handleSelect (key, keyPath) {
       // console.log(key, keyPath)
+    },
+    hasLogin () {
+      checkLogin()
+        .then(res => {
+          if (res) {
+            this.isLogin = true
+            this.username = res
+          } else {
+            this.isLogin = false
+          }
+        })
+    },
+    logout () {
+      signout()
+        .then(res => {
+          if (res === '注销成功') {
+            this.isLogin = false
+          }
+        })
     }
   },
   created () {
-    console.log('this.$route.query', this.$route.query)
+    // 检查是否登录
+    this.hasLogin()
     switch (this.$route.query.type) {
       case 'all':
         this.activeIndex = '1'
@@ -96,6 +120,9 @@ a {
   .el-input {
     flex: 1;
     margin-right: 20px;
+  }
+  .welcome {
+    color: #fff;
   }
 }
 </style>
