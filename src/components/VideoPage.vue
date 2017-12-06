@@ -42,8 +42,9 @@
     },
     methods: {
       handleCurrentChange (val) {
+        console.log('xiiugaiyema')
         // 修改前端路由
-        this.$router.push(`/home/videos/${this.type}/${val}`)
+        // this.$router.push(`/home/videos/${this.type}?page=${val}`)
         let type
         switch (this.title) {
           case '全部':
@@ -66,13 +67,13 @@
     watch: {
       '$route.params.type' (val, oldVal) {
         this.currentPage = 1
-      },
-      '$route.params.page' (val, oldVal) {
-        this.currentPage = parseInt(val)
       }
+      // '$route.params.page' (val, oldVal) {
+      //   this.currentPage = parseInt(val)
+      // }
     },
     created () {
-      this.currentPage = parseInt(this.$route.params.page)
+      // this.currentPage = parseInt(this.$route.params.page)
     }
   }
 </script>

@@ -22,8 +22,16 @@ const login = (username, pass) => {
     })
 }
 
-// 获取videos数据
-const getVideos = (type, page) => {
+// 根据类型获取videos数据
+const getVideosByType = (type) => {
+  return axios.get(`${baseUrl}list/${type}`)
+    .then((res) => {
+      return res.data
+    })
+}
+
+// 根据页码获取数据
+const getVideosByPage = (type, page) => {
   return axios.get(`${baseUrl}list/${type}/${page}`)
     .then((res) => {
       return res.data
@@ -49,7 +57,8 @@ const signout = () => {
 export default {
   register,
   login,
-  getVideos,
+  getVideosByType,
+  getVideosByPage,
   checkLogin,
   signout
 }

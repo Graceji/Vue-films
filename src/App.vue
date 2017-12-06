@@ -5,24 +5,21 @@
 </template>
 
 <script>
-import { mapActions, mapState } from 'vuex'
+import { mapActions } from 'vuex'
 export default {
   name: 'app',
   methods: {
     ...mapActions('user', ['checkLogin'])
   },
-  computed: {
-    ...mapState({
-      userName: state => state.user.userName
-    })
-  },
   created () {
+    // 组件重新创建时判断是否登录
+    this.checkLogin()
     // 若登录后再进入登录路由，则跳转到主页
     if (this.$route.path === '/login') {
       this.checkLogin()
-        .then(() => {
-          if (this.userName) {
-            this.$router.push('/home')
+        .then(res => {
+          if (res) {
+            this.$router.push('/home/videos/all')
           }
         })
     }

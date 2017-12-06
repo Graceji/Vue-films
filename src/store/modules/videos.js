@@ -15,11 +15,15 @@ const mutations = {
 
 const actions = {
   async getVideosByType ({ commit }, payload) {
-    console.log(payload)
+    const { type } = payload
+    await Api.getVideosByType(type)
+      .then(res => {
+        commit(types.VIDEOSDATA, res)
+      })
+  },
+  async getVideosByPage ({ commit }, payload) {
     const { type, page } = payload
-    console.log('type', type)
-    console.log('page', page)
-    await Api.getVideos(type, page)
+    await Api.getVideosByPage(type, page)
       .then(res => {
         commit(types.VIDEOSDATA, res)
       })

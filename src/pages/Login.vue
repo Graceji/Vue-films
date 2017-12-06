@@ -56,7 +56,7 @@ export default {
   },
   methods: {
     // ...mapMutations([`user/${types.SETUSERNAME}`]),
-    ...mapMutations('user', [types.SETUSERNAME]),
+    ...mapMutations('user', [types.SETLOGINSTATUS]),
     async login (username, pass) {
       // 进行登录接口的请求
       const data = await Api.login(username, pass)
@@ -76,7 +76,7 @@ export default {
               if (res.status === 0) {
                 this.warning('登录成功', 'success')
                 // this[`user/${types.SETUSERNAME}`]({userName: this.ruleForm.username})
-                this[types.SETUSERNAME]({userName: this.ruleForm.username})
+                this[types.SETLOGINSTATUS]({userName: this.ruleForm.username, isLogin: true})
               } else if (res.status === 1) {
                 this.warning('用户名不存在', 'warning')
               } else {
@@ -84,7 +84,7 @@ export default {
               }
             })
           setTimeout(() => {
-            this.$router.push('/home')
+            this.$router.push('/home/videos/all')
           }, 3000)
         } else {
           console.log('error submit!!')

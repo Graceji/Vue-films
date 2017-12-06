@@ -8,36 +8,7 @@ import Videos from '@/pages/Videos'
 
 Vue.use(Router)
 
-// export default new Router({
-//   mode: 'history', // HTML5 History 模式
-//   routes: [
-//     {
-//       path: '/',
-//       name: 'HomePage',
-//       component: Home,
-//       redirect: '/videos',
-//       children: [{
-//         path: 'videos',
-//         name: 'videos',
-//         component: Videos
-//       }]
-//     }, {
-//       path: 'login',
-//       name: 'Login',
-//       component: Login
-//     }, {
-//       path: 'register',
-//       name: 'Register',
-//       component: Register
-//     }, {
-//       path: 'detail/:id',
-//       name: 'Detail',
-//       component: Detail
-//     }
-//   ]
-// })
-
-export default new Router({
+const router = new Router({
   mode: 'history', // HTML5 History 模式
   routes: [{
     path: '/',
@@ -54,6 +25,9 @@ export default new Router({
     path: '/home',
     name: 'home',
     component: Home,
+    meta: {
+      auth: true
+    },
     children: [{
       path: 'videos',
       name: 'videos',
@@ -62,10 +36,6 @@ export default new Router({
       path: 'videos/:type',
       name: 'typeVideos',
       component: Videos
-    }, {
-      path: 'videos/:type/:page',
-      name: 'pageVideos',
-      component: Videos
     }]
   }, {
     path: '/detail/:id',
@@ -73,3 +43,5 @@ export default new Router({
     component: Detail
   }]
 })
+
+export default router

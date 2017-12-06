@@ -17,6 +17,7 @@ const actions = {
         isLogin: data.isLogin,
         userName: data.userName
       })
+      return true
     }
   }
 }

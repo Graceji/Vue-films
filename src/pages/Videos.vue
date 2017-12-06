@@ -23,14 +23,17 @@
       'video-page': videoPage
     },
     methods: {
-      ...mapActions('videos', ['getVideosByType']),
-      initData (type, page) {
+      ...mapActions('videos', ['getVideosByType', 'getVideosByPage']),
+      initData (type) {
         this.getVideosByType({
-          page,
           type
         })
       },
       getData (type, page) {
+        this.getVideosByPage({
+          type,
+          page
+        })
         // Api.getVideos(type, page)
         //   .then(data => {
         //     this[types.INIT_VEDIO_DATA](data)
@@ -38,27 +41,27 @@
       }
     },
     created () {
-      this.initData(this.$route.params.type, this.$route.params.page || 1)
+      this.initData(this.$route.params.type)
     },
     watch: {
       '$route' (val) {
-        const page = this.$route.params.page
+        // const page = this.$route.params.page
         switch (this.$route.params.type) {
           case 'all':
             this.title = '全部'
-            this.initData('all', page)
+            this.initData('all')
             break
           case 'film':
             this.title = '电影'
-            this.initData('film', page)
+            this.initData('film')
             break
           case 'tvplay':
             this.title = '电视剧'
-            this.initData('tvplay', page)
+            this.initData('tvplay')
             break
           case 'variety':
             this.title = '综艺'
-            this.initData('variety', page)
+            this.initData('variety')
             break
         }
       }
