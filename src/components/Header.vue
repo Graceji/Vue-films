@@ -43,7 +43,7 @@
 </template>
 
 <script>
-import { mapState } from 'vuex'
+import { mapState, mapActions } from 'vuex'
 export default {
   data () {
     return {
@@ -58,6 +58,7 @@ export default {
     // })
   },
   methods: {
+    ...mapActions('user', ['signout']),
     handleSelect (key, keyPath) {
       switch (key) {
         case '1':
@@ -93,12 +94,8 @@ export default {
       }
     },
     logout () {
-      // Api.signout()
-      //   .then(res => {
-      //     if (res === '注销成功') {
-      //       this.isLogin = false
-      //     }
-      //   })
+      // 注销
+      this.signout()
     }
   },
   created () {
@@ -113,10 +110,10 @@ export default {
 </script>
 
 <style lang="scss">
-// a {
-//   text-decoration: none;
-//   color: #fff;
-// }
+a {
+  text-decoration: none;
+  color: #fff;
+}
 .nav-header {
   flex: 1;
   display: flex;

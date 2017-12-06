@@ -19,6 +19,15 @@ const actions = {
       })
       return true
     }
+  },
+  async signout ({ commit }) {
+    const data = await Api.signout()
+    if (data === '注销成功') {
+      commit(types.SETLOGINSTATUS, {
+        isLogin: false,
+        userName: ''
+      })
+    }
   }
 }
 
