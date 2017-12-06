@@ -18,22 +18,12 @@
 </template>
 
 <script>
-  import navHeader from '../components/HomeHeader.vue'
+  import navHeader from '../components/Header.vue'
   // import Aside from '../components/Aside.vue'
   export default {
-    data () {
-      return {
-      }
-    },
-    methods: {
-    },
     components: {
       'nav-header': navHeader
       // 'aside-content': Aside
-    },
-    created () {
-      // 实例创建后初始化数据
-      // this.initVideoData()
     }
   }
 </script>

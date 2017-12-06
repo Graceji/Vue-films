@@ -1,12 +1,12 @@
 <template>
-  <video-page :datas="videos" :title="title" v-on:getNextPage="getData" />
+  <video-page :datas="videos" :title="title" :total="total" :type="this.$route.params.type" v-on:getNextPage="getData" />
 </template>
 
 <script>
   import videoPage from '../components/VideoPage.vue'
-  import { mapState, mapMutations } from 'vuex'
-  import * as types from '../store/mutation-type'
-  import { getVideos } from '../data'
+  import { mapState, mapActions } from 'vuex'
+  // import * as types from '../store/mutation-type'
+  // import Api from '../data'
   export default {
     data () {
       return {
@@ -14,59 +14,63 @@
       }
     },
     computed: {
-      ...mapState(['videos'])
+      ...mapState({
+        videos: state => state.videos.videos,
+        total: state => state.videos.totalLen
+      })
     },
     components: {
       'video-page': videoPage
     },
     methods: {
-      ...mapMutations([types.INIT_VEDIO_DATA]),
+      ...mapActions('videos', ['getVideosByType']),
       initData (type, page) {
-        getVideos(type, page)
-          .then(data => {
-            this[types.INIT_VEDIO_DATA](data)
-          })
+        this.getVideosByType({
+          page,
+          type
+        })
       },
       getData (type, page) {
-        getVideos(type, page)
-          .then(data => {
-            this[types.INIT_VEDIO_DATA](data)
-          })
+        // Api.getVideos(type, page)
+        //   .then(data => {
+        //     this[types.INIT_VEDIO_DATA](data)
+        //   })
       }
     },
     created () {
-      this.initData(this.$route.query.type || 'all', 1)
+      this.initData(this.$route.params.type, this.$route.params.page || 1)
     },
     watch: {
-      '$route.query' (val) {
-        switch (val.type) {
+      '$route' (val) {
+        const page = this.$route.params.page
+        switch (this.$route.params.type) {
           case 'all':
             this.title = '全部'
-            this.initData('all', 1)
+            this.initData('all', page)
             break
           case 'film':
             this.title = '电影'
-            this.initData('film', 1)
+            this.initData('film', page)
             break
           case 'tvplay':
             this.title = '电视剧'
-            this.initData('tvplay', 1)
+            this.initData('tvplay', page)
             break
           case 'variety':
             this.title = '综艺'
-            this.initData('variety', 1)
+            this.initData('variety', page)
             break
         }
       }
-    },
-    beforeRouteEnter (to, from, next) {
-      console.log('to', to)
-      console.log('from', from)
-      next()
-      // 在渲染该组件的对应路由被 confirm 前调用
-      // 不！能！获取组件实例 `this`
-      // 因为当守卫执行前，组件实例还没被创建
     }
+    // beforeRouteEnter (to, from, next) {
+    //   console.log('to', to)
+    //   console.log('from', from)
+    //   next()
+    //   // 在渲染该组件的对应路由被 confirm 前调用
+    //   // 不！能！获取组件实例 `this`
+    //   // 因为当守卫执行前，组件实例还没被创建
+    // }
   }
 </script>
 

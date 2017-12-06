@@ -20,7 +20,9 @@
 </template>
 
 <script>
-import { login } from '../data'
+import Api from '../data'
+import { mapMutations } from 'vuex'
+import * as types from '../store/mutation-type'
 export default {
   data () {
     const validateName = (rule, value, callback) => {
@@ -53,27 +55,37 @@ export default {
     }
   },
   methods: {
+    // ...mapMutations([`user/${types.SETUSERNAME}`]),
+    ...mapMutations('user', [types.SETUSERNAME]),
+    async login (username, pass) {
+      // 进行登录接口的请求
+      const data = await Api.login(username, pass)
+      return data
+    },
+    warning (msg, type) {
+      this.$message({
+        message: msg,
+        type
+      })
+    },
     submitForm (formName) {
       this.$refs[formName].validate((valid) => {
         if (valid) {
-          // 进行登录接口的请求
-          login(this.ruleForm.username, this.ruleForm.pass)
+          this.login(this.ruleForm.username, this.ruleForm.pass)
             .then(res => {
-              if (res === '用户名不存在' || res === '登录密码错误') {
-                this.$message({
-                  message: res,
-                  type: 'warning'
-                })
+              if (res.status === 0) {
+                this.warning('登录成功', 'success')
+                // this[`user/${types.SETUSERNAME}`]({userName: this.ruleForm.username})
+                this[types.SETUSERNAME]({userName: this.ruleForm.username})
+              } else if (res.status === 1) {
+                this.warning('用户名不存在', 'warning')
               } else {
-                this.$message({
-                  message: res,
-                  type: 'success'
-                })
-                setTimeout(() => {
-                  this.$router.push('/')
-                }, 3000)
+                this.warning('登录密码错误', 'warning')
               }
             })
+          setTimeout(() => {
+            this.$router.push('/home')
+          }, 3000)
         } else {
           console.log('error submit!!')
           return false

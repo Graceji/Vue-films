@@ -5,8 +5,28 @@
 </template>
 
 <script>
+import { mapActions, mapState } from 'vuex'
 export default {
-  name: 'app'
+  name: 'app',
+  methods: {
+    ...mapActions('user', ['checkLogin'])
+  },
+  computed: {
+    ...mapState({
+      userName: state => state.user.userName
+    })
+  },
+  created () {
+    // 若登录后再进入登录路由，则跳转到主页
+    if (this.$route.path === '/login') {
+      this.checkLogin()
+        .then(() => {
+          if (this.userName) {
+            this.$router.push('/home')
+          }
+        })
+    }
+  }
 }
 </script>
 

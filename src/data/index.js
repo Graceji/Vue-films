@@ -2,7 +2,7 @@ import axios from 'axios'
 // const baseUrl = 'http://vue.wclimb.site/vi/'
 const baseUrl = '/videos/api/'
 
-export const register = (username, pass) => {
+const register = (username, pass) => {
   return axios.post(`${baseUrl}register`, {
     username,
     pass
@@ -12,7 +12,7 @@ export const register = (username, pass) => {
   })
 }
 
-export const login = (username, pass) => {
+const login = (username, pass) => {
   return axios.post(`${baseUrl}login`, {
     username,
     pass
@@ -22,15 +22,16 @@ export const login = (username, pass) => {
     })
 }
 
-export const getVideos = (type, page) => {
-  return axios.get(`${baseUrl}list?type=${type}&page=${page}`)
+// 获取videos数据
+const getVideos = (type, page) => {
+  return axios.get(`${baseUrl}list/${type}/${page}`)
     .then((res) => {
       return res.data
     })
 }
 
 // 检查是否登录
-export const checkLogin = () => {
+const checkLogin = () => {
   return axios.get(`${baseUrl}isLogin`)
     .then(res => {
       return res.data
@@ -38,9 +39,17 @@ export const checkLogin = () => {
 }
 
 // 注销
-export const signout = () => {
+const signout = () => {
   return axios.get(`${baseUrl}signout`)
     .then(res => {
       return res.data
     })
+}
+
+export default {
+  register,
+  login,
+  getVideos,
+  checkLogin,
+  signout
 }

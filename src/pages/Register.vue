@@ -23,7 +23,7 @@
 </template>
 
 <script>
-import { register } from '../data'
+import Api from '../data'
 export default {
   data () {
     const validateName = (rule, value, callback) => {
@@ -75,7 +75,7 @@ export default {
           // this.ruleForm.username
           // this.ruleForm.pass
           // 进行注册接口的请求
-          register(this.ruleForm.username, this.ruleForm.pass)
+          Api.register(this.ruleForm.username, this.ruleForm.pass)
             .then(res => {
               if (res === '该账号已注册，请直接登录') {
                 this.$message({

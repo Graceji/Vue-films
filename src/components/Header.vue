@@ -13,16 +13,20 @@
       text-color="#fff"
       active-text-color="#ffd04b">
       <el-menu-item index="1">
-        <router-link :to="{ path: '/videos', query: { type: 'all' } }">全部</router-link>
+        全部
+        <!-- <router-link :to="{ path: '/home/videos/all' }">全部</router-link> -->
       </el-menu-item>
       <el-menu-item index="2">
-        <router-link :to="{ path: '/videos', query: { type: 'film' } }">电影</router-link>
+        电影
+        <!-- <router-link :to="{ path: '/home/videos/films' }">电影</router-link> -->
       </el-menu-item>
       <el-menu-item index="3">
-        <router-link :to="{ path: '/videos', query: { type: 'tvplay' } }">电视剧</router-link>
+        电视剧
+        <!-- <router-link :to="{ path: '/home/videos/tvplays' }">电视剧</router-link> -->
       </el-menu-item>
       <el-menu-item index="4">
-        <router-link :to="{ path: '/videos', query: { type: 'variety' } }">综艺</router-link>
+        综艺
+        <!-- <router-link :to="{ path: '/home/videos/variety' }">综艺</router-link> -->
       </el-menu-item>
     </el-menu>
     <!-- v-model="input" -->
@@ -39,7 +43,7 @@
 </template>
 
 <script>
-import { checkLogin, signout } from '../data'
+import Api from '../data'
 export default {
   data () {
     return {
@@ -50,21 +54,52 @@ export default {
   },
   methods: {
     handleSelect (key, keyPath) {
-      // console.log(key, keyPath)
+      switch (key) {
+        case '1':
+          this.$router.push('/home/videos/all')
+          break
+        case '2':
+          this.$router.push('/home/videos/film')
+          break
+        case '3':
+          this.$router.push('/home/videos/tvplay')
+          break
+        case '4':
+          this.$router.push('/home/videos/variety')
+          break
+      }
     },
-    hasLogin () {
-      checkLogin()
-        .then(res => {
-          if (res) {
-            this.isLogin = true
-            this.username = res
-          } else {
-            this.isLogin = false
-          }
-        })
+    watchRouteType () {
+      switch (this.$route.params.type) {
+        case 'all':
+          this.activeIndex = '1'
+          break
+        case 'film':
+          this.activeIndex = '2'
+          break
+        case 'tvplay':
+          this.activeIndex = '3'
+          break
+        case 'variety':
+          this.activeIndex = '4'
+          break
+        default:
+          break
+      }
     },
+    // hasLogin () {
+    //   Api.checkLogin()
+    //     .then(res => {
+    //       if (res) {
+    //         this.isLogin = true
+    //         this.username = res
+    //       } else {
+    //         this.isLogin = false
+    //       }
+    //     })
+    // },
     logout () {
-      signout()
+      Api.signout()
         .then(res => {
           if (res === '注销成功') {
             this.isLogin = false
@@ -74,32 +109,22 @@ export default {
   },
   created () {
     // 检查是否登录
-    this.hasLogin()
-    switch (this.$route.query.type) {
-      case 'all':
-        this.activeIndex = '1'
-        break
-      case 'film':
-        this.activeIndex = '2'
-        break
-      case 'tvplay':
-        this.activeIndex = '3'
-        break
-      case 'variety':
-        this.activeIndex = '4'
-        break
-      default:
-        break
+    // this.hasLogin()
+    this.watchRouteType()
+  },
+  watch: {
+    '$route' () {
+      this.watchRouteType()
     }
   }
 }
 </script>
 
 <style lang="scss">
-a {
-  text-decoration: none;
-  color: #fff;
-}
+// a {
+//   text-decoration: none;
+//   color: #fff;
+// }
 .nav-header {
   flex: 1;
   display: flex;

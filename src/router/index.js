@@ -8,31 +8,68 @@ import Videos from '@/pages/Videos'
 
 Vue.use(Router)
 
+// export default new Router({
+//   mode: 'history', // HTML5 History 模式
+//   routes: [
+//     {
+//       path: '/',
+//       name: 'HomePage',
+//       component: Home,
+//       redirect: '/videos',
+//       children: [{
+//         path: 'videos',
+//         name: 'videos',
+//         component: Videos
+//       }]
+//     }, {
+//       path: 'login',
+//       name: 'Login',
+//       component: Login
+//     }, {
+//       path: 'register',
+//       name: 'Register',
+//       component: Register
+//     }, {
+//       path: 'detail/:id',
+//       name: 'Detail',
+//       component: Detail
+//     }
+//   ]
+// })
+
 export default new Router({
   mode: 'history', // HTML5 History 模式
-  routes: [
-    {
-      path: '/',
-      name: 'HomePage',
-      component: Home,
-      redirect: '/videos',
-      children: [{
-        path: '/videos',
-        name: 'videos',
-        component: Videos
-      }]
+  routes: [{
+    path: '/',
+    redirect: '/login'
+  }, {
+    path: '/login',
+    name: 'login',
+    component: Login
+  }, {
+    path: '/register',
+    name: 'register',
+    component: Register
+  }, {
+    path: '/home',
+    name: 'home',
+    component: Home,
+    children: [{
+      path: 'videos',
+      name: 'videos',
+      component: Videos
     }, {
-      path: '/login',
-      name: 'Login',
-      component: Login
+      path: 'videos/:type',
+      name: 'typeVideos',
+      component: Videos
     }, {
-      path: '/register',
-      name: 'Register',
-      component: Register
-    }, {
-      path: '/detail/:id',
-      name: 'Detail',
-      component: Detail
-    }
-  ]
+      path: 'videos/:type/:page',
+      name: 'pageVideos',
+      component: Videos
+    }]
+  }, {
+    path: '/detail/:id',
+    name: 'Detail',
+    component: Detail
+  }]
 })

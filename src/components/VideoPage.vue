@@ -1,21 +1,21 @@
 <template>
   <div class="wrap">
     <div class="video-header">
-      <span>{{title}}({{datas.len}})</span>
+      <span>{{title}}({{total}})</span>
     </div>
     <el-row type="flex" class="row-bg">
       <!-- v-if="index < 10" -->
-      <viedo-item v-for="(item, index) in datas.datas" :key="index" :item="item" />
+      <viedo-item v-for="(item, index) in datas" :key="index" :item="item" />
     </el-row>
     <div class="block">
       <!-- @size-change="handleSizeChange" -->
       <!-- :current-page.sync="currentPage1" -->
       <el-pagination
         @current-change="handleCurrentChange"
-        :current-page="currentPage"
+        :current-page.sync="currentPage"
         :page-size="12"
         layout="total, prev, pager, next"
-        :total="datas.len">
+        :total="total">
       </el-pagination>
     </div>
   </div>
@@ -30,8 +30,10 @@
       }
     },
     props: {
-      datas: Object,
-      title: String
+      datas: Array,
+      title: String,
+      total: Number,
+      type: String
     },
     computed: {
     },
@@ -41,7 +43,7 @@
     methods: {
       handleCurrentChange (val) {
         // 修改前端路由
-        this.$router.push(`/videos?page=${val}`)
+        this.$router.push(`/home/videos/${this.type}/${val}`)
         let type
         switch (this.title) {
           case '全部':
@@ -62,13 +64,15 @@
       }
     },
     watch: {
-      '$route.query.type' (val, oldVal) {
-        // if () {
-
-        // }
+      '$route.params.type' (val, oldVal) {
         this.currentPage = 1
-        console.log('this.current', this.currentPage)
+      },
+      '$route.params.page' (val, oldVal) {
+        this.currentPage = parseInt(val)
       }
+    },
+    created () {
+      this.currentPage = parseInt(this.$route.params.page)
     }
   }
 </script>
