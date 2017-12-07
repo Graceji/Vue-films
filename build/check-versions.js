@@ -2,7 +2,7 @@
 const chalk = require('chalk')
 const semver = require('semver')
 const packageConfig = require('../package.json')
-const shell = require('shelljs')
+const shell = require('shelljs') // 使用了 shelljs 插件，可以让我们在 node 环境的 js 中使用 shell
 function exec (cmd) {
   return require('child_process').execSync(cmd).toString().trim()
 }

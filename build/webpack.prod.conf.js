@@ -70,6 +70,7 @@ const webpackConfig = merge(baseWebpackConfig, {
     // split vendor js into its own file
     new webpack.optimize.CommonsChunkPlugin({
       name: 'vendor',
+      // 依赖的 node_modules 文件会被提取到 vendor 中
       minChunks: function (module) {
         // any required modules inside node_modules are extracted to vendor
         return (
@@ -97,12 +98,14 @@ const webpackConfig = merge(baseWebpackConfig, {
     ])
   ]
 })
-
+/* 开启 gzip 的情况下使用下方的配置 */
 if (config.build.productionGzip) {
+  /* 加载 compression-webpack-plugin 插件 */
   const CompressionWebpackPlugin = require('compression-webpack-plugin')
-
+  /* 向webpackconfig.plugins中加入下方的插件 */
   webpackConfig.plugins.push(
     new CompressionWebpackPlugin({
+      /* 使用 compression-webpack-plugin 插件进行压缩 */
       asset: '[path].gz[query]',
       algorithm: 'gzip',
       test: new RegExp(
